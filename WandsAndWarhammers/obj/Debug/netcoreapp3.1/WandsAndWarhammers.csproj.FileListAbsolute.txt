@@ -1,0 +1,13 @@
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\obj\Debug\netcoreapp3.1\WandsAndWarhammers.csprojAssemblyReference.cache
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\obj\Debug\netcoreapp3.1\WandsAndWarhammers.AssemblyInfoInputs.cache
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\obj\Debug\netcoreapp3.1\WandsAndWarhammers.AssemblyInfo.cs
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\obj\Debug\netcoreapp3.1\WandsAndWarhammers.csproj.CoreCompileInputs.cache
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\bin\Debug\netcoreapp3.1\WandsAndWarhammers.exe
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\bin\Debug\netcoreapp3.1\WandsAndWarhammers.deps.json
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\bin\Debug\netcoreapp3.1\WandsAndWarhammers.runtimeconfig.json
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\bin\Debug\netcoreapp3.1\WandsAndWarhammers.runtimeconfig.dev.json
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\bin\Debug\netcoreapp3.1\WandsAndWarhammers.dll
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\bin\Debug\netcoreapp3.1\WandsAndWarhammers.pdb
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\obj\Debug\netcoreapp3.1\WandsAndWarhammers.dll
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\obj\Debug\netcoreapp3.1\WandsAndWarhammers.pdb
+C:\Users\azure\source\repos\WandsAndWarhammers\WandsAndWarhammers\obj\Debug\netcoreapp3.1\WandsAndWarhammers.genruntimeconfig.cache
