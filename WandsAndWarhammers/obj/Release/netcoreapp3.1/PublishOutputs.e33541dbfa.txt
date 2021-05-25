@@ -1,0 +1,5 @@
+C:\Users\azure\Documents\WandsWarhammersExe\WandsAndWarhammers.exe
+C:\Users\azure\Documents\WandsWarhammersExe\WandsAndWarhammers.dll
+C:\Users\azure\Documents\WandsWarhammersExe\WandsAndWarhammers.deps.json
+C:\Users\azure\Documents\WandsWarhammersExe\WandsAndWarhammers.runtimeconfig.json
+C:\Users\azure\Documents\WandsWarhammersExe\WandsAndWarhammers.pdb

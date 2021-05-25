@@ -39,17 +39,21 @@ namespace WandsAndWarhammers
             Console.WriteLine("TO THE DEATH! CHOOSE YOUR CHARACTER AND ITEMS WISELY, AND MAKE");
             Console.WriteLine("SURE TO ALWAYS INPUT YOUR ATTACK CORRECTLY IF YOU WANT TO SURVIVE!\n");
             Console.WriteLine("STANDARD ATTACKS ARE LIGHT PUNCH (HITS OFTEN AND DOES LESS DAMAGE) AND HEAVY PUNCH (THE OPPOSITE)\n\n");
-            bool aiMode = false;
-            Console.WriteLine("Press P for 2-player mode or C to play against computer.");
+            int aiMode = 0;
+            Console.WriteLine("Press P for 2-player mode or C to play against computer. Press H for hard mode vs. computer");
             char inputConsole = GetChar();
             if (inputConsole == 'c' || inputConsole=='C')
             {
-                aiMode = true;
+                aiMode = 1;
+            }
+            else if (inputConsole == 'h' || inputConsole == 'H')
+            {
+                aiMode = 2;
             }
             ProgramMid(aiMode);
         }
         
-        static void ProgramMid(bool aiMode)
+        static void ProgramMid(int aiMode)
         { 
             Random rand = new Random();
 
@@ -80,7 +84,7 @@ namespace WandsAndWarhammers
             };
             Console.WriteLine($"\n\n\n\n\n  PLAYER 2 CHOOSE YOUR CHARACTER");
             Player.PlayerList();
-            if (aiMode == false)
+            if (aiMode == 0)
             {
                 Player.GenerateStats(GetChar(), playerTwo, listAttacksPlayerTwo);
                 Console.WriteLine($"   Player 2 {playerTwo.fighterName} HP: {playerTwo.Hp} strength: {playerTwo.Strength}  accuracy: {playerTwo.Accuracy}  dodge: {playerTwo.Dodge}  speed: {playerTwo.Speed}\n");
@@ -105,8 +109,9 @@ namespace WandsAndWarhammers
                 PlayerNames.Add(8, 'h');
                 PlayerNames.Add(9, 'i');
                 PlayerNames.Add(10, 'j');
+                PlayerNames.Add(11, 'k');
 
-                PlayerNames.Add(11, 'm');
+                PlayerNames.Add(12, 'm');
 
                 int charSelect = rand.Next(1,12);
 
@@ -167,7 +172,7 @@ namespace WandsAndWarhammers
             return charInput;
         }
 
-        static void GameLoopPlayerOne(Player playerOne, List<Attack> listAttacksPlayerOne, Player playerTwo, List<Attack> listAttacksPlayerTwo, Random rand, int turnCounter, bool aiMode)
+        static void GameLoopPlayerOne(Player playerOne, List<Attack> listAttacksPlayerOne, Player playerTwo, List<Attack> listAttacksPlayerTwo, Random rand, int turnCounter, int aiMode)
         {
             if (playerTwo.TurnSomethingHappens > 0)
             {
@@ -227,25 +232,30 @@ namespace WandsAndWarhammers
                             {
                             Attack.SpecialAttack(attack, playerOne, playerTwo);
                             }
-                            int speedRandom = rand.Next(0, 801);
-                            int playerSpeed = speedRandom + attack.SpeedModifier + playerOne.Speed;
-                            if (playerSpeed > playerTwo.Speed)
-                            {
-                                bool isHit = Player.HitCalculation(rand, playerOne, playerTwo, attack);
-                                if (isHit == true)
+                            //new
+                            else if (attack.Special == false)
+                            { 
+                                int speedRandom = rand.Next(0, 801);
+                                int playerSpeed = speedRandom + attack.SpeedModifier + playerOne.Speed;
+                                if (playerSpeed > playerTwo.Speed)
                                 {
-                                    Thread.Sleep(1500);
-                                    int dmg = Player.DamageCalculation(rand, playerOne, playerTwo, attack);
-                                if (dmg > 0)
-                                {
-                                    playerTwo.Hp -= dmg;
+                                    bool isHit = Player.HitCalculation(rand, playerOne, playerTwo, attack);
+                                    if (isHit == true)
+                                    {
+                                        Thread.Sleep(1500);
+                                        int dmg = Player.DamageCalculation(rand, playerOne, playerTwo, attack);
+                                        if (dmg > 0)
+                                        {
+                                            playerTwo.Hp -= dmg;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Too slow to land the attack in time!");
+                                    }
                                 }
                             }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Too slow to land the attack in time!");
-                            }
+                            
                         }
                     }
                 Thread.Sleep(2500);
@@ -254,7 +264,7 @@ namespace WandsAndWarhammers
             }         
         }
 
-        static void GameLoopPlayerTwo(Player playerOne, List<Attack>listAttacksPlayerOne, Player playerTwo, List<Attack> listAttacksPlayerTwo, Random rand, int turnCounter, bool aiMode)
+        static void GameLoopPlayerTwo(Player playerOne, List<Attack>listAttacksPlayerOne, Player playerTwo, List<Attack> listAttacksPlayerTwo, Random rand, int turnCounter, int aiMode)
         {
             if (playerTwo.TurnSomethingHappens > 0)
             {
@@ -283,7 +293,7 @@ namespace WandsAndWarhammers
                 Console.WriteLine("Player 2 Paralyzed.");
                 GameLoopPlayerOne(playerOne, listAttacksPlayerOne, playerTwo, listAttacksPlayerTwo, rand, turnCounter, aiMode);
             }
-            else if (aiMode == false)
+            else if (aiMode == 0)
             {
                 foreach (Attack attack in listAttacksPlayerTwo)
                 {
@@ -354,24 +364,47 @@ namespace WandsAndWarhammers
                         foreachCounter++;
                 }
                     Console.WriteLine("Write which attack you want to use (with the correct spelling and capitalization!) then press enter.\n");
-
-                    int currentAiMoveChoiceNumber = rand.Next(0,AiAttackNames.Count);              
-                    string inputAI = AiAttackNames[currentAiMoveChoiceNumber];
+                bool chooseMove = false;
+                string inputAI = "a";
+                while (chooseMove == false)
+                {
+                    int currentAiMoveChoiceNumber = rand.Next(0, AiAttackNames.Count);
+                    try
+                    {
+                        if (AiAttackNames[currentAiMoveChoiceNumber].Length > 0)
+                        {
+                            inputAI = AiAttackNames[currentAiMoveChoiceNumber];
+                            chooseMove = true;
+                        }
+                    }
+                    catch (System.Collections.Generic.KeyNotFoundException)
+                    {
+                        Console.WriteLine("");
+                    }
+                }
                     Thread.Sleep(1700);
-
+                    bool oops = false;
                     char[] characters = $"{inputAI}".ToCharArray();
                     foreach( char ch in characters)
                     {
                         Console.Write($"{ch}");
-                        int pause = rand.Next(60, 150);
+                        int pause = rand.Next(50, 160);
                         Thread.Sleep(pause);
-                        if (pause == 149)
+                        if (pause < 149 && aiMode == 1)
                         {
                             Console.Write("h");
                             inputAI = "a";
+                            oops = true;
                         }
                     }
-                    Console.WriteLine("");
+                    if (oops == true)
+                    {
+                        Console.WriteLine("\nOops, typo!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("");
+                    }
                     Thread.Sleep(900);
                     foreach (Attack attack in listAttacksPlayerTwo)
                     {

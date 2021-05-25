@@ -14,6 +14,7 @@ namespace WandsAndWarhammers
         private char _injuries;
         private bool _isParalyzed;
         private int _hp;
+        private int _maxHp;
         private int _strength;
         private int _dodge;
         private int _turnSomethingHappens;
@@ -105,7 +106,18 @@ namespace WandsAndWarhammers
 
         public bool IsParalyzed { get; set; }
 
-        public int Hp  
+        public int Hp
+        {
+            get { return _hp; }
+            set {
+                    if (value <= MaxHp)
+                    {
+                        _hp = value;
+                    }
+                }
+        }
+
+        public int MaxHp
         { get; set; }
 
         public int TurnSomethingHappens
@@ -142,11 +154,13 @@ namespace WandsAndWarhammers
          
 
             Console.ForegroundColor = ConsoleColor.Blue;
-
+            
 
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("---Balanced---");
+            Console.WriteLine("K: Karl the Knight");
+            Console.WriteLine("hp: 600  strength: 450  accuracy: 600  dodge: 400  speed: 450 (2 spl. attacks)\n");
             Console.WriteLine("D: Dwight the Dragonborn");
             Console.WriteLine("hp: 600  strength: 600  accuracy: 450  dodge: 400  speed: 450 (1 spl. attack)\n");
             Console.WriteLine("C: Catherine the Catgirl");
@@ -224,6 +238,7 @@ namespace WandsAndWarhammers
                 case 'a':
                     {
                         playerNumber.fighterName = "Arnaud the Archer";
+                        playerNumber.MaxHp = 300;
                         playerNumber.Hp = 300;
                         playerNumber.Strength = 300;
                         playerNumber.Accuracy = 700;
@@ -235,6 +250,7 @@ namespace WandsAndWarhammers
                 case 'b':
                     {
                         playerNumber.fighterName = "Braun the Barbarian";
+                        playerNumber.MaxHp = 600;
                         playerNumber.Hp = 600;
                         playerNumber.Strength = 700;
                         playerNumber.Accuracy = 400;
@@ -247,6 +263,7 @@ namespace WandsAndWarhammers
                     {
                         
                         playerNumber.fighterName = "Catherine the Catgirl";
+                        playerNumber.MaxHp = 400;
                         playerNumber.Hp = 400;
                         playerNumber.Strength = 350;
                         playerNumber.Accuracy = 650;
@@ -260,6 +277,7 @@ namespace WandsAndWarhammers
                     {
 
                         playerNumber.fighterName = "Dwight the Dragonborn";
+                        playerNumber.MaxHp = 600;
                         playerNumber.Hp = 600;
                         playerNumber.Strength = 600;
                         playerNumber.Accuracy = 450;
@@ -272,6 +290,7 @@ namespace WandsAndWarhammers
                     {
 
                         playerNumber.fighterName = "Epsilios the Eldritch God";
+                        playerNumber.MaxHp = 800;
                         playerNumber.Hp = 800;
                         playerNumber.Strength = 800;
                         playerNumber.Accuracy = 300;
@@ -284,6 +303,7 @@ namespace WandsAndWarhammers
                     {
 
                         playerNumber.fighterName = "Frank the Farmer";
+                        playerNumber.MaxHp = 800;
                         playerNumber.Hp = 800;
                         playerNumber.Strength = 500;
                         playerNumber.Accuracy = 400;
@@ -297,6 +317,7 @@ namespace WandsAndWarhammers
                 case 'g':
                     {
                         playerNumber.fighterName = "Gerhardt the Gel Creature";
+                        playerNumber.MaxHp = 650;
                         playerNumber.Hp = 650;
                         playerNumber.Strength = 600;
                         playerNumber.Accuracy = 400;
@@ -311,6 +332,7 @@ namespace WandsAndWarhammers
                 case 'h':
                     {
                         playerNumber.fighterName = "Hilgride the Hag";
+                        playerNumber.MaxHp = 400;
                         playerNumber.Hp = 400;
                         playerNumber.Strength = 300;
                         playerNumber.Accuracy = 500;
@@ -323,6 +345,7 @@ namespace WandsAndWarhammers
                 case 'i':
                     {
                         playerNumber.fighterName = "Irene the Witch of Illusion";
+                        playerNumber.MaxHp = 375;
                         playerNumber.Hp = 375;
                         playerNumber.Strength = 300;
                         playerNumber.Accuracy = 550;
@@ -334,6 +357,7 @@ namespace WandsAndWarhammers
                 case 'j':
                     {
                         playerNumber.fighterName = "Jaundice the Joker";
+                        playerNumber.MaxHp = 200;
                         playerNumber.Hp = 200;
                         playerNumber.Strength = 200;
                         playerNumber.Accuracy = 600;
@@ -342,9 +366,25 @@ namespace WandsAndWarhammers
                         listAttacks.Add(new Attack() { AttackName = "Flower Acid Squirter", StrengthModifier = -50, AccModifier = +11100, SpeedModifier = +150, AmountUses = 2, Special = false });
                         break;
                     }
+                case 'k':
+                    {
+
+                        playerNumber.fighterName = "Karl the Knight";
+                        playerNumber.MaxHp = 600;
+                        playerNumber.Hp = 600;
+                        playerNumber.Strength = 450;
+                        playerNumber.Accuracy = 600;
+                        playerNumber.Dodge = 400;
+                        playerNumber.Speed = 450;
+                        listAttacks.Add(new Attack() { AttackName = "Wild Swing", StrengthModifier = +350, AccModifier = -100, SpeedModifier = 0, AmountUses = 1 });
+                        listAttacks.Add(new Attack() { AttackName = "Eat", StrengthModifier = -10000, AccModifier = +11100, SpeedModifier = +550, AmountUses = 1, Special = true });
+                        listAttacks.Add(new Attack() { AttackName = "Sure Shot", StrengthModifier = -50, AccModifier = +11100, SpeedModifier = +150, AmountUses = 1, Special = false });
+                        break;
+                    }
                 case 'm':
                     {
                         playerNumber.fighterName = "Mold Spore Army";
+                        playerNumber.MaxHp = 250;
                         playerNumber.Hp = 250;
                         playerNumber.Strength = 50;
                         playerNumber.Accuracy = 400;
@@ -415,6 +455,7 @@ namespace WandsAndWarhammers
                             playerNumber.itemNameTwo = "Earth Elemental Earrings";
                         playerNumber.Dodge -= 25;
                         playerNumber.Hp += 75;
+                        playerNumber.MaxHp += 75;
                         break;
                     }
                 case 'f':
@@ -452,7 +493,7 @@ namespace WandsAndWarhammers
                         else
                             playerNumber.itemNameTwo = "Iron Cleaver";
 
-                        listAttacks.Add(new Attack() { AttackName = "Butcher", StrengthModifier = -150, AccModifier = +100, SpeedModifier = +100, AmountUses = 2, Special = true });
+                        listAttacks.Add(new Attack() { AttackName = "Butcher", StrengthModifier = -1150, AccModifier = +100, SpeedModifier = +100, AmountUses = 2, Special = true });
                         break;
                     }
                 case 'j':
@@ -464,12 +505,22 @@ namespace WandsAndWarhammers
                         listAttacks.Add(new Attack() { AttackName = "Slippery", StrengthModifier = -10000, AccModifier = +11100, SpeedModifier = +550, AmountUses = 3, Special = true });
                         break;
                     }
+                case 'k':
+                    {
+                        if (itemNumber == 1)
+                            playerNumber.itemName = "King's Boots";
+                        else
+                            playerNumber.itemNameTwo = "King's Boots";
+                        playerNumber.Speed += 75;
+                        playerNumber.Strength -= 25;                         
+                        break;
+                    }
                 case 'm':
                     {
                         if (itemNumber == 1)
                             playerNumber.itemName = "Mace of Mortation";
                         else
-                            playerNumber.itemNameTwo = "Hellish Hairband";
+                            playerNumber.itemNameTwo = "Mace of Mortation";
                         listAttacks.Add(new Attack() { AttackName = "Mace Mortation", StrengthModifier = -10000, AccModifier = +11100, SpeedModifier = +550, AmountUses = 2, Special = true });
                         break;
                     }
@@ -483,7 +534,7 @@ namespace WandsAndWarhammers
                         if (itemNumber == 1)
                             playerNumber.itemName = "Orb of Dysfunction";
                         else
-                            playerNumber.itemNameTwo = "Hellish Hairband";
+                            playerNumber.itemNameTwo = "Orb of Dysfunction";
                         listAttacks.Add(new Attack() { AttackName = "Orb of Dysfunction", StrengthModifier = -10000, AccModifier = +11100, SpeedModifier = +550, AmountUses = 1, Special = true });
                         break;
                     }

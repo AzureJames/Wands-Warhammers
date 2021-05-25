@@ -72,8 +72,7 @@ namespace WandsAndWarhammers
                     {
                         if (playerThatCastedSpell.TurnSomethingHappens == 1)
                         {
-                            enemyPlayer.Strength += 1500;
-                            playerThatCastedSpell.Strength += 1500;
+                            enemyPlayer.IsParalyzed = false;
                         }
                         break;
                     }
@@ -137,6 +136,7 @@ namespace WandsAndWarhammers
                     case "Grow Torso":
                         {
                             Console.WriteLine("Gerhardt increases in size, gaining 180HP and slowing down by 50.");
+                            attacker.MaxHp += 180;
                             attacker.Hp += 180;
                             attacker.Speed -= 50;
                             break;
@@ -149,10 +149,9 @@ namespace WandsAndWarhammers
                         }
                     case "Orb of Dysfunction":
                         {
-                            Console.WriteLine("Both champions lose their strength for 4 turns!");
-                            attacker.Strength -= 1500;
-                            defender.Strength -= 1500;
-                            attacker.TurnSomethingHappens = 6;
+                            Console.WriteLine("The orb paralyses your opponent for 2 turns!");
+                            defender.IsParalyzed = true;
+                            attacker.TurnSomethingHappens = 5;
                             break;
                         }
                     case "Wretched Mutation":
@@ -184,6 +183,7 @@ namespace WandsAndWarhammers
                     case "Illusory Bomb":
                         {
                             Console.WriteLine("Irene glows brightly then explodes in a blinding glow, doing 250 damage to her enemy!");
+                            attacker.MaxHp += 25;
                             attacker.Hp += 25;
                             attacker.Strength += 25;
                             attacker.Accuracy += 25;
@@ -205,6 +205,7 @@ namespace WandsAndWarhammers
                             {
                                 Console.WriteLine("and blesses you with unholy might!");
                                 attacker.Strength += 75;
+                                attacker.MaxHp += 75;
                                 attacker.Hp += 75;
                             }
                             break;
@@ -214,12 +215,13 @@ namespace WandsAndWarhammers
                             Console.WriteLine("Epsilios implodes himself into a protected sphere!");
                             attacker.Strength -= 200;
                             attacker.Dodge += 200;
+                            attacker.MaxHp += 80;
                             attacker.Hp += 80;
                             break;
                         }
                     case "Farmer's Reactions":
                         {
-                            Console.WriteLine("Frank focuses, increasing his speed and agility and the expense of strength.");
+                            Console.WriteLine($"{attacker.fighterName} focuses, increasing his speed and agility and the expense of strength.");
                             attacker.Strength -= 150;
                             attacker.Dodge += 100;
                             attacker.Speed += 100;
@@ -227,9 +229,10 @@ namespace WandsAndWarhammers
                         }
                     case "Butcher":
                         {
-                            Console.WriteLine("The champion hacks into the meat of their opponent, reducing strength & dodge!");
-                            defender.Strength -= 25;
-                            defender.Dodge -= 25;
+                            Console.WriteLine("The champion hacks into the meat of their opponent, reducing HP, strength & dodge!");
+                            defender.Strength -= 20;
+                            defender.Dodge -= 20;
+                            defender.Hp -= 25;
                             break;
                         }
                     case "Slippery":
